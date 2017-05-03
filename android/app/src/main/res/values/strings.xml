@@ -1,4 +1,4 @@
 <resources>
     <string moduleConfig="true" name="mobileCenterAnalytics_whenToEnableAnalytics">ALWAYS_SEND</string>
-    <string name="app_name">react_native_navigation_bootstrap</string>
+    <string name="app_name">KBPKI</string>
 </resources>

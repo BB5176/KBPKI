@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
-class react_native_navigation_bootstrap extends Component {
+class KBPKI extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
 });
 
-Navigation.registerComponent('react-native-navigation-bootstrap', () => react_native_navigation_bootstrap);
+Navigation.registerComponent('react-native-navigation-bootstrap', () => KBPKI);
 Navigation.startSingleScreenApp({
   screen: {
     screen: 'react-native-navigation-bootstrap',
