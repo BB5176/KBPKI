@@ -1,3 +1,4 @@
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -13,6 +14,8 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
+import {Navigation} from 'react-native-navigation';
+import HomeScreen from './src/homeScreen';
 import {Navigation} from 'react-native-navigation';
 
 require('./src/data/sites');
@@ -90,10 +93,10 @@ const styles = StyleSheet.create({
    },
 });
 
-Navigation.registerComponent('react-native-navigation-bootstrap', () => KBPKI);
+Navigation.registerComponent('homeScreen', () => HomeScreen);
 Navigation.startSingleScreenApp({
   screen: {
-    screen: 'react-native-navigation-bootstrap',
-    title: 'Navigation Bootstrap'
+    screen: 'homeScreen',
+    title: 'KBPKI'
   }
 });
