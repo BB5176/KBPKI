@@ -1,4 +1,4 @@
-﻿[
+﻿global.sites = JSON.parse(`[
   {
     "name": "Portal",
     "country": "ALL",
@@ -1360,4 +1360,4 @@
       }
     }
   }
-]
+]`);
