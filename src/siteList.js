@@ -39,11 +39,12 @@ const styles = StyleSheet.create({
   },
 });
 
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.uri !== r2.uri});   
+
 class SitesList extends Component {
 constructor(props) {
     super(props);
    
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.uri !== r2.uri});   
     this.state={
         selectedUri: "",
         dataSource: ds.cloneWithRows(this.props.dt)
@@ -69,14 +70,9 @@ rowPress(data){
       );
   }  
   render() {
-
-console.log('this2', this.props);
-      console.log('----',this.state );
      
       let control = null;
       if ((this.state.selectedUri === "")){
-
-          console.log('list view', this );
         control = <ListView
                 dataSource={this.state.dataSource}
                 renderRow={this.renderRow.bind(this)}
@@ -84,8 +80,6 @@ console.log('this2', this.props);
       }
       else {
           const url= this.state.selectedUri;
-          console.log('asdasdasdassd', url);
-          
           control = <WebView
                         ref={(ref) => { this.webview = ref; }}
                         source={{ uri: url }}
@@ -93,7 +87,6 @@ console.log('this2', this.props);
                          domStorageEnabled={true}
                         startInLoadingState={true}
                         onNavigationStateChange={(event) => {
-                            console.log('ggggggg', url, event.url);
                         //if (event.url !== url) {
                             this.webview.stopLoading();
                             Linking.openURL(event.url);
