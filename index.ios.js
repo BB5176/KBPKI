@@ -9,14 +9,46 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
+require('./src/data/sites');
+
 class KBPKI extends Component {
+  constructor() {
+    super();
+    
+    this.state = {
+         listItems: []
+      };
+
+    global.sites.forEach(function(el) {
+      if (!this.state.listItems.includes(el.country)) {
+        this.state.listItems.push(el.country);
+      }
+    }, this);
+  }
+  
+  createItem = (item) => (
+
+      <TouchableOpacity key={item}>
+        <Text
+          style={styles.item}>
+          {item}
+        </Text>
+      </TouchableOpacity>
+  )
+
   render() {
     return (
       <View style={styles.container}>
+        <ScrollView horizontal={true}>
+          {this.state.listItems.map(this.createItem)}
+        </ScrollView>
+
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
@@ -49,6 +81,13 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  item: {
+      margin: 15,
+      padding: 15,
+      height: 40,
+      borderColor: 'red',
+      borderWidth: 1
+   },
 });
 
 Navigation.registerComponent('react-native-navigation-bootstrap', () => KBPKI);
