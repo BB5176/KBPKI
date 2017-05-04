@@ -4,153 +4,194 @@ import {
     Text,
     TouchableOpacity,
     ListView,
-  StyleSheet
+  StyleSheet, WebView, Linking
 } from 'react-native';
+import {OpenUrl} from 'react-native-open-url';
+require('./data/sites');
 
 class SitesList extends Component {
 constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.uri !== r2.uri});
+    var linksArray = [];
+    global.sites.forEach(function(element) {
+        if (element.url.syst !== undefined){
+            console.log(element.url.syst.direct)
+            linksArray.push({uri:element.url.syst.direct, Name: element.name})
+        }
+
+    }, this);
+
     this.state={
-        dataSource: ds.cloneWithRows([
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-             {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-              {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-              {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"},
-            {uri: "www.google.lt", Name: "Google"},
-            {uri: "www.delfi.lt", Name: "delfi"},
-            {uri: "www.alfa.lt", Name: "Alfa"},
-            {uri: "www.ebus.lt", Name: "Ebus"}
-        ])
+        selectedUri: "",
+        dataSource: ds.cloneWithRows(linksArray /*[
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+             {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"},
+            {uri: "http://google.lt", Name: "Google"},
+            {uri: "http://delfi.lt", Name: "delfi"},
+            {uri: "http://alfa.lt", Name: "Alfa"},
+            {uri: "http://ebus.lt", Name: "Ebus"}
+        ]*/)
     }
 }
 rowPress(data){
-    console.log("Row pressed ", data.uri, data);
+    const uri = data.uri;
+    console.log("Row pressed ", uri);
+    this.setState({selectedUri: uri});
 }
   renderRow(row){
       return (
             <TouchableOpacity onPress={() => this.rowPress(row)} uri={row.uri} >
                 <Text> {row.Name} </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> 
       );
   }  
   render() {
+      console.log('----',this.state );
+     
+      let control = null;
+      if ((this.state.selectedUri === "")){
+        control = <ListView
+                dataSource={this.state.dataSource}
+                renderRow={this.renderRow.bind(this)}
+            />
+      }
+      else {
+          const url= this.state.selectedUri;
+          console.log('asdasdasdassd', url);
+          
+          control = <WebView
+                        ref={(ref) => { this.webview = ref; }}
+                        source={{ uri: url }}
+                        javaScriptEnabled={true}
+                         domStorageEnabled={true}
+                        startInLoadingState={true}
+                        onNavigationStateChange={(event) => {
+                            console.log('ggggggg', url, event.url);
+                        //if (event.url !== url) {
+                            this.webview.stopLoading();
+                            Linking.openURL(event.url);
+                        //}
+                        }}
+                    />
+      }
     return (
       <View style={styles.container}>
-        <ListView
-            dataSource={this.state.dataSource}
-            renderRow={this.renderRow.bind(this)}
-        />
+        { control}
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    top: 120,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import {
     View,
@@ -8,6 +7,8 @@ import {
 
 const styles = {
     ViewStyle: {
+        position: 'absolute',
+        top: 60,
         flexWrap: 'wrap', 
         alignItems: 'flex-start',
         flexDirection:'row',
