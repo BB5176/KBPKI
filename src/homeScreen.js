@@ -59,7 +59,7 @@ class HomeScreen extends Component {
         }
 
     }, this);
-    this.setState({data: linksArray});
+    this.setState({data: linksArray, selectedEnv: env});
   }
   render() {
   
@@ -67,7 +67,7 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Channel/>
-        <Environment filterData={this.getData}/>
+        <Environment filterData={this.getData} selectedEnv={this.state.selectedEnv}/>
         <SiteList dt={this.state.data}/>
       </View>
     );

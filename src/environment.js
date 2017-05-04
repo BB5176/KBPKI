@@ -58,15 +58,12 @@ class Environment extends Component {
     }
 
     pushTestButton() {
-        this.setState({selectedEnv: 'TEST'});
         this.props.filterData('test');
     }
     pushSystButton() {
-        this.setState({selectedEnv: 'SYST'});
         this.props.filterData('syst');
     }
     pushProdButton() {
-        this.setState({selectedEnv: 'PROD'});
         this.props.filterData('prod');
     }
 
@@ -75,14 +72,14 @@ class Environment extends Component {
     let isSystSelected = false;
     let isProdSelected = false;
 
-    switch (this.state.selectedEnv) {
-        case 'TEST':
+    switch (this.props.selectedEnv) {
+        case 'test':
             isTestSelected = true;
             break;
-        case 'SYST':
+        case 'syst':
             isSystSelected = true;
             break;
-        case 'PROD':
+        case 'prod':
             isProdSelected = true;
             break;
     }
