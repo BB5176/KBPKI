@@ -6,6 +6,7 @@ import {
   View
 } from 'react-native';
 import Environment from './environment';
+import SiteList from './siteList';
 import {Navigation} from 'react-native-navigation';
 
 class HomeScreen extends Component {
@@ -13,6 +14,7 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Environment/>
+        <SiteList/>
       </View>
     );
   }
