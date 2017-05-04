@@ -26,7 +26,18 @@ const styles = {
         justifyContent:'space-around', 
         flexWrap: 'wrap', 
         alignItems: 'flex-start',
-
+    },
+    ButtonPressedStyle: {
+        flexDirection:'column',
+        width: '30%',
+        height: 46,
+        borderRadius: 40,
+        borderColor: '#00aae8',
+        backgroundColor: '#00aae8',
+        borderWidth: 1,
+        justifyContent:'space-around', 
+        flexWrap: 'wrap', 
+        alignItems: 'flex-start',
     },
     TextStyle: {
         color: 'white',
@@ -38,31 +49,66 @@ const styles = {
     }
 }
 class Environment extends Component {
+    constructor() {
+        super();
 
-    pushTestButton(){
-        console.log('Test pushed', this.props);
+        this.state = {
+            selectedEnv: false,
+        };
+    }
+
+    pushTestButton() {
+        this.setState({selectedEnv: 'TEST'});
         this.props.filterData('test');
     }
-    pushSystButton(){
-        console.log('Syst pushed');
+    pushSystButton() {
+        this.setState({selectedEnv: 'SYST'});
         this.props.filterData('syst');
     }
-    pushProdButton(){
-        console.log('PROD pushed');
+    pushProdButton() {
+        this.setState({selectedEnv: 'PROD'});
         this.props.filterData('prod');
     }
 
   render() {
+    let isTestSelected = false;
+    let isSystSelected = false;
+    let isProdSelected = false;
+
+    switch (this.state.selectedEnv) {
+        case 'TEST':
+            isTestSelected = true;
+            break;
+        case 'SYST':
+            isSystSelected = true;
+            break;
+        case 'PROD':
+            isProdSelected = true;
+            break;
+    }
+
     return (
         <View style={styles.ViewStyle} >
-            <TouchableOpacity style={styles.ButtonStyle} onPress={this.pushTestButton.bind(this)}> 
+            <TouchableOpacity 
+                style={isTestSelected ? styles.ButtonPressedStyle : styles.ButtonStyle} 
+                disabled={isTestSelected}
+                onPress={this.pushTestButton.bind(this)}
+            > 
                 <Text style={styles.TextStyle}> TEST </Text>
             </TouchableOpacity>
-            <TouchableOpacity  style={styles.ButtonStyle} onPress={this.pushSystButton.bind(this)}> 
-                <Text  style={styles.TextStyle}> SYST </Text>
+            <TouchableOpacity
+                style={isSystSelected ? styles.ButtonPressedStyle : styles.ButtonStyle}
+                disabled={isSystSelected}
+                onPress={this.pushSystButton.bind(this)}
+            > 
+                <Text style={styles.TextStyle}> SYST </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ButtonStyle} onPress={this.pushProdButton.bind(this)}> 
-                <Text  style={styles.TextStyle}> PROD </Text>
+            <TouchableOpacity 
+                style={isProdSelected ? styles.ButtonPressedStyle : styles.ButtonStyle} 
+                disabled={isProdSelected}
+                onPress={this.pushProdButton.bind(this)}
+            > 
+                <Text style={styles.TextStyle}> PROD </Text>
             </TouchableOpacity>
         </View>
     );
