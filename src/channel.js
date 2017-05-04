@@ -3,8 +3,10 @@ import {
     View,
     Text,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableHighlight
 } from 'react-native';
+import ReactNativeComponentTree from 'ReactNativeComponentTree';
 require('./data/sites');
 
 
@@ -30,6 +32,18 @@ const styles = {
     alignItems: 'center',
     borderRadius: 40,
   },
+  ButtonPressedStyle: {
+    margin: 10,
+    padding: 5,
+    height: 30,
+    width: 48,
+    borderColor: '#345b70',
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 40,
+    backgroundColor: 'green'
+  },
   TextStyle: {
       color: 'white',
   }
@@ -40,7 +54,8 @@ class Channel extends Component {
         super();
         
         this.state = {
-            listItems: []
+            listItems: [],
+            selectedChannel: false
         };
 
         global.sites.forEach(function(el) {
@@ -50,20 +65,35 @@ class Channel extends Component {
         }, this);
     }
 
-    createItem = (item) => (
-        <TouchableOpacity key={item} style={styles.ButtonStyle}>
-            <Text
-            style={styles.TextStyle}>
-            {item}
+    onPressHandler(e) {
+        const elem = ReactNativeComponentTree.getInstanceFromNode(e.currentTarget)._currentElement;
+        this.setState({selectedChannel: elem.props.children[0].props.children});
+    }
+
+    createItem = (item) => {
+        const isSelectedItem = (this.state.selectedChannel === item);
+        const touchableStyle = isSelectedItem ? styles.ButtonPressedStyle : styles.ButtonStyle;
+        
+        return <TouchableOpacity
+            style={touchableStyle}
+            key={item}
+            disabled={isSelectedItem}
+            onPress={this.onPressHandler.bind(this)}
+        >
+            <Text style={styles.TextStyle}>
+                {item}
             </Text>
         </TouchableOpacity>
-    )
+    }
 
     render() {
         return (
         <View style={styles.ViewStyle}>
-            <ScrollView horizontal={true}>
-            {this.state.listItems.map(this.createItem)}
+            <ScrollView 
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+            >   
+                {this.state.listItems.map(this.createItem)}
             </ScrollView>
         </View>
         );
