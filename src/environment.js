@@ -52,7 +52,7 @@ class Environment extends Component {
     return (
         <View style={styles.ViewStyle} >
             <TouchableOpacity style={styles.ButtonStyle} onPress={this.pushTestButton.bind(this)}> 
-                <Text style={styles.TextStyle}> TEST </Text>
+                <Text style={styles.TextStyle}> TESTs </Text>
             </TouchableOpacity>
             <TouchableOpacity  style={styles.ButtonStyle} onPress={this.pushSystButton.bind(this)}> 
                 <Text  style={styles.TextStyle}> SYST </Text>
