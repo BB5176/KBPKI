@@ -59,15 +59,19 @@ class Channel extends Component {
         };
 
         global.sites.forEach(function(el) {
-        if (!this.state.listItems.includes(el.country)) {
-            this.state.listItems.push(el.country);
-        }
+            if (!this.state.listItems.includes(el.country)) {
+                this.state.listItems.push(el.country);
+            }
         }, this);
     }
 
     onPressHandler(e) {
         const elem = ReactNativeComponentTree.getInstanceFromNode(e.currentTarget)._currentElement;
-        this.setState({selectedChannel: elem.props.children[0].props.children});
+        const selectedChannel = elem.props.children[0].props.children;
+        this.setState({selectedChannel});
+        global.filteredCountry = selectedChannel;
+        this.props.filterData();
+
     }
 
     createItem = (item) => {

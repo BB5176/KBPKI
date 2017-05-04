@@ -58,13 +58,16 @@ class Environment extends Component {
     }
 
     pushTestButton() {
-        this.props.filterData('test');
+        global.filteredEnv = 'test';
+        this.props.filterData();
     }
     pushSystButton() {
-        this.props.filterData('syst');
+        global.filteredEnv = 'syst';
+        this.props.filterData();
     }
     pushProdButton() {
-        this.props.filterData('prod');
+        global.filteredEnv = 'prod';
+        this.props.filterData();
     }
 
   render() {
@@ -72,7 +75,7 @@ class Environment extends Component {
     let isSystSelected = false;
     let isProdSelected = false;
 
-    switch (this.props.selectedEnv) {
+    switch (global.filteredEnv) {
         case 'test':
             isTestSelected = true;
             break;
@@ -85,7 +88,7 @@ class Environment extends Component {
     }
 
     return (
-        <View style={styles.ViewStyle} >
+        <View style={styles.ViewStyle}>
             <TouchableOpacity 
                 style={isTestSelected ? styles.ButtonPressedStyle : styles.ButtonStyle} 
                 disabled={isTestSelected}

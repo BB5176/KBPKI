@@ -24,12 +24,14 @@ class HomeScreen extends Component {
   componentWillMount(){
     this.getData();
   }
-  getData(env){
-    
-    console.log('getdata',env,  this.state.data);
+  getData() {
+    const env = global.filteredEnv;
+    const country = global.filteredCountry;
+    console.log('getdata', env, this.state.data);
     var linksArray = [];
     global.sites.forEach(function(element) {
-      const e = element.url;
+      if (!country || country === element.country) {
+        const e = element.url;
         if (e.test !== undefined && (env === 'test' || env === undefined)){
           console.log('TEST')
           if (e.test.direct !== undefined){
@@ -38,8 +40,7 @@ class HomeScreen extends Component {
           if (e.test.popUp !== undefined){
             linksArray.push({uri:e.test.popUp, Name: 'TEST -' + element.name + ' (popup)'})
           }
-        }
-         if (e.syst !== undefined && (env === 'syst' || env === undefined)){
+        } else if (e.syst !== undefined && (env === 'syst' || env === undefined)){
           console.log('SSYT')
           if (e.syst.direct !== undefined){
             linksArray.push({uri:e.syst.direct, Name: 'SYST -' + element.name + ' (direct)'})
@@ -47,8 +48,7 @@ class HomeScreen extends Component {
           if (e.syst.popUp !== undefined){
             linksArray.push({uri:e.syst.popUp, Name: 'SYST -' + element.name + ' (popup)'})
           }
-        }
-        if (e.prod !== undefined && (env === 'prod' || env === undefined)){
+        } else if (e.prod !== undefined && (env === 'prod' || env === undefined)){
           console.log('PROD')
           if (e.prod.direct !== undefined){
             linksArray.push({uri:e.prod.direct, Name: 'PROD -' + element.name + ' (direct)'})
@@ -57,17 +57,17 @@ class HomeScreen extends Component {
             linksArray.push({uri:e.prod.popUp, Name: 'PROD -' + element.name + ' (popup)'})
           }
         }
-
+      } // End of country if
     }, this);
-    this.setState({data: linksArray, selectedEnv: env});
+    this.setState({data: linksArray});
   }
   render() {
   
     console.log('data filted ß', this.state.data);
     return (
       <View style={styles.container}>
-        <Channel/>
-        <Environment filterData={this.getData} selectedEnv={this.state.selectedEnv}/>
+        <Channel filterData={this.getData} />
+        <Environment filterData={this.getData}/>
         <SiteList dt={this.state.data}/>
       </View>
     );
