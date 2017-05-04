@@ -7,7 +7,6 @@ import {
   StyleSheet, WebView, Linking
 } from 'react-native';
 import {OpenUrl} from 'react-native-open-url';
-require('./data/sites');
 
 const styles = StyleSheet.create({
   container: {
@@ -17,7 +16,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    height: 300
+    height: 300,
+    padding: 5
     //backgroundColor: 'red'
   },
   renderRow: {
@@ -40,23 +40,16 @@ const styles = StyleSheet.create({
 });
 
 class SitesList extends Component {
-constructor() {
-    super();
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.uri !== r2.uri});
-    var linksArray = [];
-    global.sites.forEach(function(element) {
-        if (element.url.syst !== undefined){
-            console.log(element.url.syst.direct)
-            linksArray.push({uri:element.url.syst.direct, Name: element.name})
-        }
-
-    }, this);
-
+constructor(props) {
+    super(props);
+   
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.uri !== r2.uri});   
     this.state={
         selectedUri: "",
-        dataSource: ds.cloneWithRows(linksArray )
+        dataSource: ds.cloneWithRows(this.props.dt)
     }
 }
+
 rowPress(data){
     const uri = data.uri;
     console.log("Row pressed ", uri);
@@ -70,6 +63,8 @@ rowPress(data){
       );
   }  
   render() {
+
+console.log('this2', this.props);
       console.log('----',this.state );
      
       let control = null;
