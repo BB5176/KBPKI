@@ -12,24 +12,24 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     top: 120,
+    width:'100%',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    height: 300,
+    height: 325,
     padding: 5
-    //backgroundColor: 'red'
   },
   renderRow: {
     borderWidth: 1,
     borderRadius: 10,
-    width: '90%',
+    width: '98%',
     padding: 5,
-    margin: 5,
+    margin: 3,
+    backgroundColor: '#F5FCFF',
     borderColor: 'silver'
   },
   renderText: {
-    fontSize: 20,
+    fontSize: 14,
     color: '#003755'
   },
   instructions: {

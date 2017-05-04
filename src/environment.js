@@ -18,7 +18,7 @@ const styles = {
     ButtonStyle: {
         flexDirection:'column',
         width: '30%',
-        height: 46,
+        height: 30,
         borderRadius: 40,
         borderColor: '#345b70',
         backgroundColor: '#004063',
@@ -30,7 +30,7 @@ const styles = {
     ButtonPressedStyle: {
         flexDirection:'column',
         width: '30%',
-        height: 46,
+        height: 30,
         borderRadius: 40,
         borderColor: '#00aae8',
         backgroundColor: '#00aae8',
@@ -41,8 +41,7 @@ const styles = {
     },
     TextStyle: {
         color: 'white',
-        width: '65%',
-        
+        left: 32,
         flexDirection:'row',
         textAlign:'right',
         justifyContent:'space-around'
