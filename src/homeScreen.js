@@ -24,13 +24,14 @@ class HomeScreen extends Component {
   componentWillMount(){
     this.getData();
   }
-  getData(){
+  getData(env){
     
-    console.log('getdata', this.state.data);
+    console.log('getdata',env,  this.state.data);
     var linksArray = [];
     global.sites.forEach(function(element) {
       const e = element.url;
-        if (e.test !== undefined){
+        if (e.test !== undefined && (env === 'test' || env === undefined)){
+          console.log('TEST')
           if (e.test.direct !== undefined){
             linksArray.push({uri:e.test.direct, Name: 'TEST -' + element.name + ' (direct)'})
           }
@@ -38,7 +39,8 @@ class HomeScreen extends Component {
             linksArray.push({uri:e.test.popUp, Name: 'TEST -' + element.name + ' (popup)'})
           }
         }
-         if (e.syst !== undefined){
+         if (e.syst !== undefined && (env === 'syst' || env === undefined)){
+          console.log('SSYT')
           if (e.syst.direct !== undefined){
             linksArray.push({uri:e.syst.direct, Name: 'SYST -' + element.name + ' (direct)'})
           }
@@ -46,7 +48,8 @@ class HomeScreen extends Component {
             linksArray.push({uri:e.syst.popUp, Name: 'SYST -' + element.name + ' (popup)'})
           }
         }
-        if (e.prod !== undefined){
+        if (e.prod !== undefined && (env === 'prod' || env === undefined)){
+          console.log('PROD')
           if (e.prod.direct !== undefined){
             linksArray.push({uri:e.prod.direct, Name: 'PROD -' + element.name + ' (direct)'})
           }
@@ -60,12 +63,12 @@ class HomeScreen extends Component {
   }
   render() {
   
-    console.log('data', this.state.data);
+    console.log('data filted ß', this.state.data);
     return (
       <View style={styles.container}>
         <Channel/>
-        <Environment/>
-        <SiteList  dt={this.state.data}/>
+        <Environment filterData={this.getData}/>
+        <SiteList dt={this.state.data}/>
       </View>
     );
   }

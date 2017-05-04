@@ -50,6 +50,15 @@ constructor(props) {
     }
 }
 
+componentWillReceiveProps(nextProps){
+    console.log('thius.props', this.props);
+    console.log('thius.nextProps', nextProps);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1.uri !== r2.uri});   
+    this.state={
+        selectedUri: "",
+        dataSource: ds.cloneWithRows(nextProps.dt)
+    }
+}
 rowPress(data){
     const uri = data.uri;
     console.log("Row pressed ", uri);
@@ -69,6 +78,8 @@ console.log('this2', this.props);
      
       let control = null;
       if ((this.state.selectedUri === "")){
+
+          console.log('list view', this );
         control = <ListView
                 dataSource={this.state.dataSource}
                 renderRow={this.renderRow.bind(this)}

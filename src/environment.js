@@ -40,13 +40,16 @@ const styles = {
 class Environment extends Component {
 
     pushTestButton(){
-        console.log('Test pushed');
+        console.log('Test pushed', this.props);
+        this.props.filterData('test');
     }
     pushSystButton(){
         console.log('Syst pushed');
+        this.props.filterData('syst');
     }
     pushProdButton(){
         console.log('PROD pushed');
+        this.props.filterData('prod');
     }
 
   render() {
