@@ -6,12 +6,14 @@ import {
   View
 } from 'react-native';
 import Environment from './environment';
+import Channel from './channel'
 import {Navigation} from 'react-native-navigation';
 
 class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Channel/>
         <Environment/>
       </View>
     );
