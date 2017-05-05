@@ -4,7 +4,7 @@ import {
     Text,
     TouchableOpacity,
     ListView,
-    AsyncStorage,
+ //   AsyncStorage,
   StyleSheet, WebView, Linking
 } from 'react-native';
 import {OpenUrl} from 'react-native-open-url';
@@ -55,7 +55,13 @@ constructor(props) {
 rowPress(data){
     const uri = data.uri;
     this.setState({selectedUri: uri});
-}
+}/*
+ componentWillMount() {
+      this.getUrls();
+  } 
+  componentWillUpdate(){
+       this.getUrls();
+  }*/
 renderRow = (row) => {
     let name = '';
      global.sites.forEach(function(element) {
@@ -100,6 +106,7 @@ renderRow = (row) => {
       let control = null;
       if ((this.state.selectedUri === "")){
         if (global.RecentlyUsedLinksArray !== undefined){
+            console.log('global.RecentlyUsedLinksArray ', global.RecentlyUsedLinksArray );
                 control =   <View >
                                 <Text style={styles.title}> Recently used link </Text>
                                 {global.RecentlyUsedLinksArray.map(this.renderRow)}

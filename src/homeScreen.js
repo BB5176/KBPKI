@@ -5,7 +5,7 @@ import {
   Text,
   Alert,
   View,
-  AsyncStorage
+ // AsyncStorage
 } from 'react-native';
 import Environment from './environment';
 import SiteList from './siteList';
@@ -52,14 +52,14 @@ class HomeScreen extends Component {
 
   componentWillMount() {
     this.getData();
-      this.getUrls();
+      //this.getUrls();
   } 
   componentWillUpdate(){
-  this.getUrls();
+  //this.getUrls();
   }
 
   getUrls(){
-      AsyncStorage.getItem("kbpkiLinks").then((value) => {
+  /*    AsyncStorage.getItem("kbpkiLinks").then((value) => {
         if (value !== null){
           const RecentlyUsedLinksArray = [];
           const restoredArray = JSON.parse(value);
@@ -71,7 +71,7 @@ class HomeScreen extends Component {
         }
         
       }).done();
-
+*/
       }
   getData() {
     const env = global.filteredEnv;
