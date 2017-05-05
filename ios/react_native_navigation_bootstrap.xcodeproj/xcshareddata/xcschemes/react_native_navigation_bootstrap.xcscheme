@@ -29,8 +29,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "KBPKI.app"
-               BlueprintName = "KBPKI"
+               BuildableName = "react_native_navigation_bootstrap.app"
+               BlueprintName = "react_native_navigation_bootstrap"
                ReferencedContainer = "container:react_native_navigation_bootstrap.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -71,8 +71,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "KBPKI.app"
-            BlueprintName = "KBPKI"
+            BuildableName = "react_native_navigation_bootstrap.app"
+            BlueprintName = "react_native_navigation_bootstrap"
             ReferencedContainer = "container:react_native_navigation_bootstrap.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -94,8 +94,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "KBPKI.app"
-            BlueprintName = "KBPKI"
+            BuildableName = "react_native_navigation_bootstrap.app"
+            BlueprintName = "react_native_navigation_bootstrap"
             ReferencedContainer = "container:react_native_navigation_bootstrap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -113,8 +113,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "KBPKI.app"
-            BlueprintName = "KBPKI"
+            BuildableName = "react_native_navigation_bootstrap.app"
+            BlueprintName = "react_native_navigation_bootstrap"
             ReferencedContainer = "container:react_native_navigation_bootstrap.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
