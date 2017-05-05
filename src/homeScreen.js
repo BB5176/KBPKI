@@ -3,11 +3,13 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+    AsyncStorage
 } from 'react-native';
 import Environment from './environment';
 import SiteList from './siteList';
 import Channel from './channel'
+import RecentlyUsed from './recentlyUsed';
 import {Navigation} from 'react-native-navigation';
 
 require('./data/sites');
@@ -19,11 +21,39 @@ class HomeScreen extends Component {
         data: ""
     }
     this.getData = this.getData.bind(this);
-    
   }
   componentWillMount(){
     this.getData();
+      this.getUrls();
+  } 
+  componentWillUpdate(){
+  this.getUrls();
   }
+
+
+componentDidMount() {
+    AsyncStorage.getItem("ebus").then((value) => {
+        this.setState({"ebus": value});
+        console.log('2222', this.state)
+    }).done();
+    console.log('111', this.state)
+}
+
+  getUrls(){
+      AsyncStorage.getItem("kbpkiLinks").then((value) => {
+        if (value !== null){
+          const RecentlyUsedLinksArray = [];
+          const restoredArray = JSON.parse(value);
+         for (i = restoredArray.length-1; i >= 0; i--){
+              RecentlyUsedLinksArray.push(restoredArray[i]);
+         }
+         global.RecentlyUsedLinksArray = RecentlyUsedLinksArray;
+         
+        }
+        
+      }).done();
+
+      }
   getData() {
     const env = global.filteredEnv;
     const country = global.filteredCountry;
@@ -71,6 +101,7 @@ class HomeScreen extends Component {
         <Channel filterData={this.getData} />
         <Environment filterData={this.getData}/>
         <SiteList dt={this.state.data}/>
+        <RecentlyUsed /> 
       </View>
     );
   }
