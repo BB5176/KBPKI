@@ -129,6 +129,7 @@ rowPress(data){
                         //if (event.url !== url) {
                            this.webview.stopLoading();
                            Linking.openURL(event.url);
+                           this.setState({selectedUri: ""});
                         //}
                         }}
                     />
