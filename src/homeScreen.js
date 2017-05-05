@@ -35,32 +35,34 @@ class HomeScreen extends Component {
         if (e.test !== undefined && (env === 'test' || env === undefined)){
           console.log('TEST')
           if (e.test.direct !== undefined){
-            linksArray.push({uri:e.test.direct, Name: 'TEST -' + element.name + ' (direct)'})
+            linksArray.push({uri:e.test.direct, Name: element.name + ' (TEST' + '_direct)'})
           }
-          if (e.test.popUp !== undefined){
-            linksArray.push({uri:e.test.popUp, Name: 'TEST -' + element.name + ' (popup)'})
+          if (e.test.popup !== undefined){
+            linksArray.push({uri:e.test.popUp, Name: element.name + ' (TEST' + '_popup)'})
           }
         } else if (e.syst !== undefined && (env === 'syst' || env === undefined)){
           console.log('SSYT')
           if (e.syst.direct !== undefined){
-            linksArray.push({uri:e.syst.direct, Name: 'SYST -' + element.name + ' (direct)'})
+            linksArray.push({uri:e.syst.direct, Name: element.name + ' (SYST' + '_direct)'})
           }
-          if (e.syst.popUp !== undefined){
-            linksArray.push({uri:e.syst.popUp, Name: 'SYST -' + element.name + ' (popup)'})
+          if (e.syst.popup !== undefined){
+            linksArray.push({uri:e.syst.popUp, Name: element.name + ' (SYST' + '_popup)'})
           }
         } else if (e.prod !== undefined && (env === 'prod' || env === undefined)){
           console.log('PROD')
           if (e.prod.direct !== undefined){
-            linksArray.push({uri:e.prod.direct, Name: 'PROD -' + element.name + ' (direct)'})
+            linksArray.push({uri:e.prod.direct, Name: element.name + ' (PROD' + '_direct)'})
           }
-          if (e.prod.popUp !== undefined){
-            linksArray.push({uri:e.prod.popUp, Name: 'PROD -' + element.name + ' (popup)'})
+          if (e.prod.popup !== undefined){
+            linksArray.push({uri:e.prod.popUp, Name: element.name + ' (PROD' + '_popup)'})
           }
         }
       } // End of country if
     }, this);
     this.setState({data: linksArray});
   }
+
+
   render() {
   
     console.log('data filted ß', this.state.data);
