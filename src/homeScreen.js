@@ -5,7 +5,8 @@ import {
   Text,
   Alert,
   View,
-  AsyncStorage
+  AsyncStorage,
+  Platform
 } from 'react-native';
 import Environment from './environment';
 import SiteList from './siteList';
@@ -45,7 +46,9 @@ class HomeScreen extends Component {
   onNavigatorEvent(event) {
     if (event.type == 'NavBarButtonPress') {
       if (event.id == 'device-info-btn') {
-        Alert.alert('Current device information', 'Device info HERE!');
+        const platformName = (Platform.OS === 'ios') ? "Apple iOS" : "Android";
+
+        Alert.alert('Current device information', 'I am running on ' + platformName);
       }
     }
   }
