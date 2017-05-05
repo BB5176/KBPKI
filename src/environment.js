@@ -14,6 +14,7 @@ const styles = {
         flexDirection:'row',
         width: '100%',
         justifyContent:'space-around',
+        height: '13%'
     },
     ButtonStyle: {
         flexDirection:'column',

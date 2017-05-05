@@ -99,10 +99,10 @@ componentDidMount() {
     console.log('data filted ß', this.state.data);
     return (
       <View style={styles.container}>
-        <Channel filterData={this.getData} />
-        <Environment filterData={this.getData}/>
-        <SiteList dt={this.state.data} hack={this.getData}/>
-        <RecentlyUsed />
+        <Channel filterData={this.getData} style={styles.channnel}/>
+        <Environment filterData={this.getData} style={styles.env}/>
+        <SiteList dt={this.state.data} hack={this.getData} style={styles.siteList}/>
+        <RecentlyUsed style={styles.recently}/>
       </View>
     );
   }
@@ -125,6 +125,18 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  siteList:{
+
+  },
+  env:{
+
+  },
+  channnel:{
+
+  },
+  recently:{
+    
+  }
 });
 
 export default HomeScreen;
