@@ -10,7 +10,6 @@
     "mobile-center-crashes": "^0.4.0",
     "react": "15.4.2",
     "react-native": "0.42.0",
-    "react-native-device-info": "^0.10.2",
     "react-native-navigation": "next",
     "react-native-open-url": "^1.0.0"
   }

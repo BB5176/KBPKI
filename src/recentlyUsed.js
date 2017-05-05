@@ -122,8 +122,6 @@ renderRow = (row) => {
       let control = null;
       if ((this.state.selectedUri === "")){
         if (global.RecentlyUsedLinksArray !== undefined){
-            
-            console.log('global.RecentlyUsedLinksArray ', global.RecentlyUsedLinksArray );
                 control =   <View >
                                 <Text style={styles.title}> Recently used link </Text>
                                 {global.RecentlyUsedLinksArray.map(this.renderRow)}
@@ -144,8 +142,7 @@ renderRow = (row) => {
                         //if (event.url !== url) {
                            this.webview.stopLoading();
                            Linking.openURL(event.url);
-                           this.setState({selectedUri: ""});
-                        //}
+                           this.setState({selectedUri: ""});                        //}
                         }}
                     />
       }
