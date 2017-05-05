@@ -5,7 +5,7 @@ import {
   Text,
   Alert,
   View,
- // AsyncStorage
+  AsyncStorage
 } from 'react-native';
 import Environment from './environment';
 import SiteList from './siteList';
@@ -120,7 +120,7 @@ class HomeScreen extends Component {
       <View style={styles.container}>
         <Channel filterData={this.getData} />
         <Environment filterData={this.getData}/>
-        <SiteList dt={this.state.data}/>
+        <SiteList dt={this.state.data} hack={this.getData}/>
         <RecentlyUsed />
       </View>
     );

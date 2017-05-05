@@ -4,7 +4,7 @@ import {
     Text,
     TouchableOpacity,
     ListView,
-   // AsyncStorage,
+    AsyncStorage,
   StyleSheet, WebView, Linking
 } from 'react-native';
 import {OpenUrl} from 'react-native-open-url';
@@ -73,7 +73,7 @@ rowPress(data){
             </TouchableOpacity> 
       );
   }  
-  getIndex(value, arr, prop) {
+  getIndex(value, arr) {
     for(var i = 0; i < arr.length; i++) {
         if(arr[i] === value) {
             return i;
@@ -82,33 +82,41 @@ rowPress(data){
     return -1; //to handle the case where the value doesn't exist
 }
   writeToMemory(url){
-     /*AsyncStorage.getItem("kbpkiLinks").then((value) => {
+     AsyncStorage.getItem("kbpkiLinks").then((value) => {
         if (value === null){
+
           const stringifiedArray = JSON.stringify([url])
           AsyncStorage.setItem("kbpkiLinks", stringifiedArray);
         }
         else
         {
+          
           const restoredArray = JSON.parse(value);
-          if (this.getIndex(url, restoredArray) !== -1){
-              restoredArray.push(url);
-              if ( restoredArray.length> 4){
-                restoredArray.splice(0, 1);
+          if (this.getIndex(url, restoredArray) === -1){
+          const rArray = JSON.parse(value);
+              rArray.push(url);
+              if ( rArray.length> 4){
+                rArray.splice(0, 1);
               }
-              const stringifiedArray = JSON.stringify(restoredArray);
+              const stringifiedArray = JSON.stringify(rArray);
 
               const RecentlyUsedLinksArray = [];
-                const restoredArray = JSON.parse(stringifiedArray);
-              for (i = restoredArray.length-1; i >= 0; i--){
-                    RecentlyUsedLinksArray.push(restoredArray[i]);
+                const resArray = JSON.parse(stringifiedArray);
+
+              for (i = resArray.length-1; i >= 0; i--){
+                    RecentlyUsedLinksArray.push(resArray[i]);
               }
               global.RecentlyUsedLinksArray = RecentlyUsedLinksArray;
               
               AsyncStorage.setItem("kbpkiLinks", stringifiedArray);
+              console.log('set state ')
+              this.props.hack();
           }
         }
           }).done();
-           */
+           
+
+
      //AsyncStorage.setItem("kbpkiLinks", "bla bla bla");*/
   }
   render() {
