@@ -4,13 +4,14 @@ import {
   StyleSheet,
   Text,
   Alert,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import Environment from './environment';
 import SiteList from './siteList';
 import Channel from './channel'
-import { Navigation } from 'react-native-navigation';
-import NavigationBar from 'react-native-navbar';
+import RecentlyUsed from './recentlyUsed';
+import {Navigation} from 'react-native-navigation';
 
 require('./data/sites');
 
@@ -29,6 +30,7 @@ class HomeScreen extends Component {
       }
     ]
   };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -50,7 +52,36 @@ class HomeScreen extends Component {
 
   componentWillMount() {
     this.getData();
+      this.getUrls();
+  } 
+  componentWillUpdate(){
+  this.getUrls();
   }
+
+
+componentDidMount() {
+    AsyncStorage.getItem("ebus").then((value) => {
+        this.setState({"ebus": value});
+        console.log('2222', this.state)
+    }).done();
+    console.log('111', this.state)
+}
+
+  getUrls(){
+      AsyncStorage.getItem("kbpkiLinks").then((value) => {
+        if (value !== null){
+          const RecentlyUsedLinksArray = [];
+          const restoredArray = JSON.parse(value);
+         for (i = restoredArray.length-1; i >= 0; i--){
+              RecentlyUsedLinksArray.push(restoredArray[i]);
+         }
+         global.RecentlyUsedLinksArray = RecentlyUsedLinksArray;
+         
+        }
+        
+      }).done();
+
+      }
   getData() {
     const env = global.filteredEnv;
     const country = global.filteredCountry;
@@ -96,8 +127,9 @@ class HomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Channel filterData={this.getData} />
-        <Environment filterData={this.getData} />
-        <SiteList dt={this.state.data} />
+        <Environment filterData={this.getData}/>
+        <SiteList dt={this.state.data}/>
+        <RecentlyUsed />
       </View>
     );
   }

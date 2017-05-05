@@ -4,6 +4,7 @@ import {
     Text,
     TouchableOpacity,
     ListView,
+    AsyncStorage,
   StyleSheet, WebView, Linking
 } from 'react-native';
 import {OpenUrl} from 'react-native-open-url';
@@ -16,8 +17,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: 325,
+    height: 300,
     padding: 5
+  },
+  title:{
+    color: '#7F9BAA'
   },
   renderRow: {
     borderWidth: 1,
@@ -69,14 +73,47 @@ rowPress(data){
             </TouchableOpacity> 
       );
   }  
+  getIndex(value, arr, prop) {
+    for(var i = 0; i < arr.length; i++) {
+        if(arr[i] === value) {
+            return i;
+        }
+    }
+    return -1; //to handle the case where the value doesn't exist
+}
+  writeToMemory(url){
+      AsyncStorage.getItem("kbpkiLinks").then((value) => {
+        if (value === null){
+          const stringifiedArray = JSON.stringify([url])
+          AsyncStorage.setItem("kbpkiLinks", stringifiedArray);
+        }
+        else
+        {
+          const restoredArray = JSON.parse(value);
+          if (this.getIndex(url, restoredArray) !== -1){
+              restoredArray.push(url);
+              if ( restoredArray.length> 4){
+                restoredArray.splice(0, 1);
+              }
+              const stringifiedArray = JSON.stringify(restoredArray);
+              AsyncStorage.setItem("kbpkiLinks", stringifiedArray);
+          }
+        }
+          }).done();
+           
+     //AsyncStorage.setItem("kbpkiLinks", "bla bla bla");*/
+  }
   render() {
      
       let control = null;
       if ((this.state.selectedUri === "")){
-        control = <ListView
-                dataSource={this.state.dataSource}
-                renderRow={this.renderRow.bind(this)}
-            />
+        control = <View >
+                    <Text style={styles.title}> KBPKI Site list </Text>
+                            <ListView
+                        dataSource={this.state.dataSource}
+                        renderRow={this.renderRow.bind(this)}
+                    />
+            </View>
       }
       else {
           const url= this.state.selectedUri;
@@ -87,9 +124,11 @@ rowPress(data){
                          domStorageEnabled={true}
                         startInLoadingState={true}
                         onNavigationStateChange={(event) => {
+                        this.writeToMemory(event.url);
+                         console.log('compare url, -', event.url !== url, event.url, url);
                         //if (event.url !== url) {
-                            this.webview.stopLoading();
-                            Linking.openURL(event.url);
+                           this.webview.stopLoading();
+                           Linking.openURL(event.url);
                         //}
                         }}
                     />
