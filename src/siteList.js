@@ -4,7 +4,7 @@ import {
     Text,
     TouchableOpacity,
     ListView,
-   // AsyncStorage,
+    AsyncStorage,
   StyleSheet, WebView, Linking
 } from 'react-native';
 import {OpenUrl} from 'react-native-open-url';
@@ -82,7 +82,7 @@ rowPress(data){
     return -1; //to handle the case where the value doesn't exist
 }
   writeToMemory(url){
-     /*AsyncStorage.getItem("kbpkiLinks").then((value) => {
+      AsyncStorage.getItem("kbpkiLinks").then((value) => {
         if (value === null){
           const stringifiedArray = JSON.stringify([url])
           AsyncStorage.setItem("kbpkiLinks", stringifiedArray);
@@ -96,19 +96,11 @@ rowPress(data){
                 restoredArray.splice(0, 1);
               }
               const stringifiedArray = JSON.stringify(restoredArray);
-
-              const RecentlyUsedLinksArray = [];
-                const restoredArray = JSON.parse(stringifiedArray);
-              for (i = restoredArray.length-1; i >= 0; i--){
-                    RecentlyUsedLinksArray.push(restoredArray[i]);
-              }
-              global.RecentlyUsedLinksArray = RecentlyUsedLinksArray;
-              
               AsyncStorage.setItem("kbpkiLinks", stringifiedArray);
           }
         }
           }).done();
-           */
+           
      //AsyncStorage.setItem("kbpkiLinks", "bla bla bla");*/
   }
   render() {
@@ -137,7 +129,6 @@ rowPress(data){
                         //if (event.url !== url) {
                            this.webview.stopLoading();
                            Linking.openURL(event.url);
-                           this.setState({selectedUri: ""});
                         //}
                         }}
                     />
